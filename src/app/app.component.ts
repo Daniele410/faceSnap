@@ -1,45 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { FaceSnapComponent } from "./face-snap/face-snap.component";
-import { FaceSnap } from './models/face-snap';
+import { Component} from '@angular/core';
+import { FaceSnapListComponent } from './face-snap-list/face-snap-list.component';
+import { HeaderComponent } from "./header/header.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, FaceSnapComponent],
+  imports: [FaceSnapListComponent, HeaderComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-export class AppComponent implements OnInit {
-  mySnap!: FaceSnap;
-  myOtherSnap!: FaceSnap;
-  myLastSnap!: FaceSnap;
-  faceSnaps!: FaceSnap[];
-
-
-  ngOnInit(): void {
-    this.faceSnaps = [
-      new FaceSnap(
-        'Face Snap',
-        'A simple face snap application',
-        'https://www.w3schools.com/w3images/avatar2.png',
-        new Date,
-        5),
-      new FaceSnap(
-        'Super Face Snap',
-        'A super face snap application',
-        'https://www.w3schools.com/w3images/avatar2.png',
-        new Date,
-        100),
-      new FaceSnap(
-        'Last Face Snap',
-        'A last face snap application',
-        'https://www.w3schools.com/w3images/avatar3.png',
-        new Date,
-        1150)
-    ];
-
-    this.faceSnaps[1].setLocation('A la montagne');
-  }
+export class AppComponent {
 
 }
