@@ -9,7 +9,8 @@ import {AsyncPipe} from "@angular/common";
   imports: [
     HeaderComponent,
     RouterOutlet,
-    AsyncPipe
+    AsyncPipe,
+
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
