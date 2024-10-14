@@ -1,5 +1,13 @@
 <div class="landing-block">
-    <img src="https://face-snap-42.netlify.app/assets/snapface.png" alt="landing page">
-    <div class="landing-links">
-        <button (click)="onContinue()">Continue to Snapface</button>
-    </div>
+
+  <img src="assets/images/snapface.png" alt="snapface">
+  <div class="landing-links">
+    <button (click)="onContinue()">Continue to Snapface</button>
+  </div>
+
+  <form #newsletterForm="ngForm" (ngSubmit)="onSubmitForm(newsletterForm)">
+    <label for="emailInput">Sign up to receive our newsletter!</label>
+    <input id="emailInput" name="userEmail" type="email" [(ngModel)]="userEmail">
+    <button type="submit">OK!</button>
+  </form>
+</div>

@@ -10,7 +10,7 @@ export class FaceSnapsService {
     new FaceSnap(
       'Face Snap',
       'A simple face snap application',
-      'https://www.w3schools.com/w3images/avatar1.png',
+      '/assets/images/sunshine.jpg',
       new Date,
       5),
     new FaceSnap(

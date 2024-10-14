@@ -1,21 +1,29 @@
-import { Component } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import {Component} from '@angular/core';
+import {Router, RouterLink} from '@angular/router';
+import {FormsModule, NgForm} from "@angular/forms";
 
 @Component({
   selector: 'app-landing-page',
   standalone: true,
   imports: [
-    RouterLink
+    RouterLink,
+    FormsModule
   ],
   templateUrl: './landing-page.component.html',
   styleUrl: './landing-page.component.scss'
 })
 export class LandingPageComponent {
 
-constructor(private router: Router) { }
+  userEmail: string = '';
 
-onContinue() {
-this.router.navigateByUrl('facesnaps');
-}
+  constructor(private router: Router) {
+  }
 
+  onContinue() {
+    this.router.navigateByUrl('facesnaps');
+  }
+
+  onSubmitForm(form: NgForm) {
+    console.log(form.value);
+  }
 }

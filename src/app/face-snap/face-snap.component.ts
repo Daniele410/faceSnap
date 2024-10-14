@@ -15,6 +15,8 @@ import { Router } from '@angular/router';
 export class FaceSnapComponent {
   @Input() faceSnap!: FaceSnap;
 
+
+
   constructor(private router: Router) { }
 
   onViewFaceSnap() {
