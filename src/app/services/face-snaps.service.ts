@@ -1,16 +1,17 @@
 import {Injectable} from '@angular/core';
 import {FaceSnap} from '../models/face-snap';
 import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
+import {map, Observable, switchMap} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class FaceSnapsService {
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+  }
 
-  faceSnaps: FaceSnap[] = [
+  /*faceSnaps: FaceSnap[] = [
     {
       id: 1,
       title: 'Archibald',
@@ -63,7 +64,7 @@ export class FaceSnapsService {
       createdDate: new Date(),
       snaps: 101
     }
-  ];
+  ];*/
 
   getAllFaceSnaps(): Observable<FaceSnap[]> {
     return this.http.get<FaceSnap[]>('http://localhost:3000/facesnaps');
@@ -74,12 +75,18 @@ export class FaceSnapsService {
 
   }
 
-  snapFaceSnapById(faceSnapId: number, snapType: 'snap' | 'unsnap'): void {
-    /*const faceSnap = this.getFaceSnapById(faceSnapId);
-    snapType === 'snap' ? faceSnap.snaps++ : faceSnap.snaps--;*/
+  snapFaceSnapById(faceSnapId: number, snapType: 'snap' | 'unsnap'): Observable<FaceSnap> {
+
+    return this.getFaceSnapById(faceSnapId).pipe(
+      map(faceSnap => ({
+        ...faceSnap,
+        snaps: faceSnap.snaps + (snapType === 'snap' ?  + 1 : -1) // ternary operator
+      })),
+      switchMap(updateFaceSnap => this.http.put<FaceSnap>(`http://localhost:3000/facesnaps/${faceSnapId}`, updateFaceSnap))
+    );
   }
 
-  addFaceSnap(formValue: { title: string; description: string; imageUrl: string; location: string }): void {
+  /*addFaceSnap(formValue: { title: string; description: string; imageUrl: string; location: string }): void {
     const newFaceSnap: FaceSnap = {
       id: this.faceSnaps[this.faceSnaps.length - 1].id + 1,
       createdDate: new Date(),
@@ -87,5 +94,5 @@ export class FaceSnapsService {
       ...formValue
     };
     this.faceSnaps.push(newFaceSnap);
-  }
+  }*/
 }
