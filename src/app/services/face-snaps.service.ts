@@ -11,6 +11,8 @@ export class FaceSnapsService {
   constructor(private http: HttpClient) {
   }
 
+  faceSnaps!: FaceSnap[];
+
   /*faceSnaps: FaceSnap[] = [
     {
       id: 1,
@@ -80,19 +82,30 @@ export class FaceSnapsService {
     return this.getFaceSnapById(faceSnapId).pipe(
       map(faceSnap => ({
         ...faceSnap,
-        snaps: faceSnap.snaps + (snapType === 'snap' ?  + 1 : -1) // ternary operator
+        snaps: faceSnap.snaps + (snapType === 'snap' ? +1 : -1) // ternary operator
       })),
       switchMap(updateFaceSnap => this.http.put<FaceSnap>(`http://localhost:3000/facesnaps/${faceSnapId}`, updateFaceSnap))
     );
   }
 
-  /*addFaceSnap(formValue: { title: string; description: string; imageUrl: string; location: string }): void {
-    const newFaceSnap: FaceSnap = {
-      id: this.faceSnaps[this.faceSnaps.length - 1].id + 1,
-      createdDate: new Date(),
+  addFaceSnap(formValue: {
+    title: string;
+    description: string;
+    imageUrl: string;
+    location: string
+  }): Observable<FaceSnap> {
+    return this.getAllFaceSnaps().pipe(
+      map(faceSnaps => [...faceSnaps].sort((a, b) => a.id - b.id)),
+      map(sortedFaceSnaps => sortedFaceSnaps[sortedFaceSnaps.length - 1]),
+      map(previousFaceSnap => ({
+        ...formValue,
       snaps: 0,
-      ...formValue
-    };
-    this.faceSnaps.push(newFaceSnap);
-  }*/
+        createdDate: new Date(),
+        id: previousFaceSnap.id + 1
+
+      })),
+      switchMap(newFaceSnap => this.http.post<FaceSnap>('http://localhost:3000/facesnaps', newFaceSnap))
+    );
+  }
+
 }
