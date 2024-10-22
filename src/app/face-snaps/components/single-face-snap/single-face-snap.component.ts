@@ -3,8 +3,9 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, RouterLink} from '@angular/router';
 import {AsyncPipe, DatePipe, NgClass, NgIf, NgStyle, UpperCasePipe} from "@angular/common";
 import {Observable, tap} from "rxjs";
-import {FaceSnap} from "../core/models/face-snap";
-import {FaceSnapsService} from "../core/services/face-snaps.service";
+import {FaceSnap} from "../../../core/models/face-snap";
+import {FaceSnapsService} from "../../../core/services/face-snaps.service";
+
 
 @Component({
   selector: 'app-single-face-snap',

@@ -4,8 +4,9 @@ import {FaceSnapComponent} from "../face-snap/face-snap.component";
 
 import {Observable} from "rxjs";
 import {AsyncPipe, NgForOf} from "@angular/common";
-import {FaceSnap} from "../core/models/face-snap";
-import {FaceSnapsService} from "../core/services/face-snaps.service";
+import {FaceSnap} from "../../../core/models/face-snap";
+import {FaceSnapsService} from "../../../core/services/face-snaps.service";
+
 
 @Component({
   selector: 'app-face-snap-list',

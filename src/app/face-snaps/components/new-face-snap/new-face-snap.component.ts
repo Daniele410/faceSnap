@@ -4,8 +4,9 @@ import {map, Observable, tap} from "rxjs";
 
 import {AsyncPipe, DatePipe, NgIf, UpperCasePipe} from "@angular/common";
 import {Router, RouterLink} from "@angular/router";
-import {FaceSnapsService} from "../core/services/face-snaps.service";
-import {FaceSnap} from "../core/models/face-snap";
+import {CoreModule} from "../../../core/core.module";
+import {FaceSnap} from "../../../core/models/face-snap";
+import {FaceSnapsService} from "../../../core/services/face-snaps.service";
 
 
 @Component({
@@ -17,7 +18,8 @@ import {FaceSnap} from "../core/models/face-snap";
     UpperCasePipe,
     DatePipe,
     RouterLink,
-    NgIf
+    NgIf,
+    CoreModule
   ],
   templateUrl: './new-face-snap.component.html',
   styleUrl: './new-face-snap.component.scss'
